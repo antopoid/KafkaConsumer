@@ -1,4 +1,4 @@
-**This is a kafka consumer python programm, wich deserialize data from an avro schema registry and access is managed by kerberos and security by ssl** 
+**This is a kafka consumer python programm (designed for windows use), wich deserialize data from an avro schema registry and access is managed by kerberos and security by ssl** 
 
 *For it to work, you need these Files and Access requirement:*
 - krb5.ini (for windows), or krb5.conf (for linux)
