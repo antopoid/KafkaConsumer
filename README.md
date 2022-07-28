@@ -61,11 +61,11 @@ We wrote basic kafka tutorials that use docker and your local environnment in or
 ### 1. Installing and Configuring your env
 *(All the steps below needs to be done on the bastion or server, your own local computer will be used just to download files)*
 
-*(Use the share drive to transfer files from you local computer to the bastion `\\gad.ses.com\GroupDir\Betzdorf\Common\Temp share`)*
-1. Clone the repository in your computer: `https://git.intranet.ses/kafka-consumer/kafka-consumer.git`
-2. You can also download all the software needed from [here](https://sesglobal.sharepoint.com/:f:/s/msteams_f26c43/EkSFO0BjSzlLi6gBIPAj6gAB9Vyn500WKkfoyrWSXqPISg?e=ULX6WN)
+*(Use the share drive to transfer files from you local computer to the bastion)*
+1. Clone the repository in your computer: `git clone https://github.com/antopoid/KafkaConsumer.git`
+2. You can also download all the software needed from [here](https://cloud.antopoid.com/s/7apLtjcrRXfZMZT)
 3. Download miniconda, Install it (click next with default values) you can use another python env manager but this one make a lot of steps easier: [Download here](https://conda.io/miniconda.html)
-4. You can download and use my environment: [here](https://sesglobal.sharepoint.com/:u:/s/msteams_f26c43/EQXxrduLRw5EqkRB_Ts6HhoBTycrklcGg793tUSl32-cHA?e=mENZyN)
+4. You can download and use my environment: [here](https://cloud.antopoid.com/s/ymg3qxGbT99AEae)
 5. Now unzip and put your env in `C:\Users\username\Miniconda3\envs` and activate it by typing in miniconda:  `conda activate kafka`
 6. Launch miniconda and create your first env (or if you downloaded mine skip this step): `conda env create -f environment.yml`
 7. Move into the folder where you cloned the git repository `cd /your/path/to/git/repo`
