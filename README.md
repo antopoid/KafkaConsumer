@@ -51,7 +51,7 @@ Using: [confluent-kafka-python](https://github.com/confluentinc/confluent-kafka-
 
 ## Tutorials (Optional step not mandatory)
 We wrote basic kafka tutorials that use docker and your local environnment in order to make you understand the basic kafka aspects.
-1. You can start by reading the doc in [Introduction](/Tutorial_kafka/Tutorial local access/Tutorial_kafkabasics/Introduction.docx)  `./Tutorial_kafka/Tutorial local access/Tutorial_kafkabasics/Introduction.docx` 
+1. You can start by reading the doc in `./Tutorial_kafka/Tutorial local access/Tutorial_kafkabasics/Introduction.docx` 
 2. And after that you can follow the tutorial from 0 to 3.
 3. Have fun an good luck !
 4. A file explanation is also available in `./Tutorial_kafka/File_explanation`
