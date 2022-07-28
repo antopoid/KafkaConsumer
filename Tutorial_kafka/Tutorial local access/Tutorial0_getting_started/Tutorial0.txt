@@ -1,0 +1,67 @@
+--------------------------
+Tutorial0
+--------------------------
+
+For Tutorial0 and Tutorial1, we will run the basic kafka consumer and producer on our localhost server. The consumer consumes the information from the server when the producer uploads information to
+the server. We run the basic examples locally as they do not require any authentification when accessing the server, hence making this example more basic. Furthermore, running these examples locally,
+allows us to format the information exchanges as we like.
+
+As mentioend in the requirements.txt file in the kafkabasic directory, we need docker. Hence, after having installed docker, we run these commands in the command prompt:
+
+	docker-compose create
+	docker-compose up -d	
+
+in order to create a docker container. Note that these commands should be run where the docker-compose.yml file is located.
+Thoses containers will host our zookeeper (manage kafka brokers) and kafka server (we only have one broker).
+If everything was set up properlly, you should see 2 different containers after running this command: 
+
+	docker ps -a
+
+Once your docker container is created, we will run our python scripts. They will be run in our Anaconda/mini-conda prompts. Make sure to activate the environment where confluent-kafka is present with thoses commands:
+
+	conda create kafka
+	conda activate kafka
+
+Now we can install confluent-kafka library and check python binary.
+
+	conda install python=3.7
+	conda install pip
+	pip install confluent-kafka
+
+Also, you need to run the codes in the directory where the scripts are located (this is obvious to more experienced programmers, and will be assumed common knowledge from Tutorial1 onwards). At this point 
+you may need to install extra packages to make the script work. So firstly, in a first Anaconda/mini-conda prompt, we will run the consumer.py file with this command.
+
+	python python_file_consumer.py getting_started.ini
+
+You should leave the getting_started.ini file untouched. It will configure the server you are trying to access: localhost:9092 (translation of 127.0.0.1). 9092 is always the port number for local kafka brokers. If the consumer runs smoothly, a 'waiting...' line should be appearing at a fix time interval without any error. This means that the consumer is succesfuly fetching data from the 9092 server at fix time intervals but is not finding any. 
+
+From now we can run the producer, with this command (below), in a seperate Anaconda/mini-conda prompt. This is done so that you can see them interatc with each other. 
+	
+	python python_file_producer.py getting_started.ini
+
+When you run the producer, the data which you upload to the local kafka server should appear in the prompt of your producer. Furthermore, a very short time span afterwards, it should also appear in 
+the consumer prompt. This is how you know it worked. You can change in the producer script the data inputs, names, etc.
+
+Once this has worked, you should not forget to first Ctrl+C the running codes in the prompts and close your docker container. These commands should help you to do so:
+
+	docker-compose kill
+	docker-compose rm
+
+These commands kill and remove the container.  
+
+--------------------------
+Extra useful information
+--------------------------
+
+getting_started.ini:
+	This is the initial settings files when running the python scripts. Apart from the localhost server, we also mention the group.id settings and the auto.offset.reset setting. The group.id
+	assigns itself to rthe consumer process, and the auto.offset.reset tells the consumer where to look. It is now set on 'earliest', which means it will look for the earliest posted by 
+	a producer. 'latest'  will look for the latest data.
+docker-compose.yml:
+	This file gives the settings to create the docker container. It creates the zookeeper and the kafka broker. Zookeeper is just centralised system used in kafka to allow multiple reads
+	and commits for a broker. The broker is essentially the server port 9092.
+
+	more on zookeeper:
+		https://www.cloudkarafka.com/blog/cloudkarafka-what-is-zookeeper.html
+Useful links:
+		https://kafka.apache.org/documentation/

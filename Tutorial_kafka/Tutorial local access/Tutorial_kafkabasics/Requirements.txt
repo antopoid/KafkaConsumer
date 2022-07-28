@@ -1,0 +1,41 @@
+
+
+Requirements:
+	
+	These examples and tutorials were originally performed with Anaconda/Miniconda.
+
+	install python verion 3.7
+	
+	create an environment with the standard python modules and the modules:
+		-confluent_kafka
+
+	install docker (docker compose)
+
+	make sure to have a search engine (this example uses microsft edge)
+
+
+-----------
+Why docker?
+-----------
+Docker let us simulate an environment that is similar to the one available in SES.
+It consist of creating containers wich host a service and its minimal requirement in order to make it run.
+Every container can be completely indepandant of the other ones or not, depends on your needs.
+Reliable, easy to setup, fast and powerful docker is the best solution to simulate our local environment.
+
+
+--------------------
+Why confluent-kafka?
+--------------------
+Confluent_kafka consist of python library, it is one of the fastest available on the web wich is open sourced.
+It is based on the famous and unique librdkafka written in C.
+Well documented, with a big community and used by SES, it is the best choice to develop something in python (with kerberos support).
+
+
+--------------------
+Why python version 3.7?
+--------------------
+Seems to be the most stable one compatible with Confluent_kafka.
+You can try newer versions at your own risks.
+
+
+

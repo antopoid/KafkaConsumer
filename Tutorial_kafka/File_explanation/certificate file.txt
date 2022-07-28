@@ -1,0 +1,14 @@
+The certificate file
+___________________________
+
+definition:
+
+The certificate file (.crt) is the file which allows you identify yourself when making an ssl request
+in a kerberos log in. It should also be provided by the team which is in charge of handling the kafka
+brokers and access to them.
+
+placement:
+
+Any path accessible to the the consumer. Again please specify full path when inputting it as a variable
+in the properties of the consumer.
+

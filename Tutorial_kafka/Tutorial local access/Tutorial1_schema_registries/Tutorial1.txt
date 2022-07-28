@@ -1,0 +1,54 @@
+----------
+Tutorial1
+----------
+
+Now that we have created a basic consumer producer setup in Tutorial0, its is time to introduce schema registries. These are a way to store how the data is formated. So in the topic, where the 
+values are stored, which we access with a kafka broker, their name or category might not be stored there. Hence, we need to fetch from the schema registry a way to read those values and assign 
+them their category. Example:
+
+	values_output = ['blue','tall', 'UK]
+	schema_registry_output = ['favourite color','adjective','last visited country']
+
+The format of the schemas registry used here is AVRO in JSON, Data are serialised then sent then received and then deserialised, wich is completely different from the previous tutorial. Raw data received cannot be understood without a schema registry.
+
+So first of all, exactly like in the previous tutorial, we need to launch all the containers needed for kafka and schema registry.
+we are going to create 5 containers, kafka broker and zookeeper are still there, but we will need 2 more, control center (web interface to administrate), schema registry server to store the futur schemas in link with kafka.
+
+	docker-compose create
+	docker-compose up -d
+	docker ps -a
+
+you can check the health of your entire cluster by going on this link http://localhost:9021/, wich access the web interface.
+
+This tutorial part will then be exactly the same as the previous except for the fact that we will start by running the producer (with the command below), as the prompt will ask us to enter the 
+values of the categorie names. Once we are done entering the values, we press enter and the data with format is sent to the locahost server.
+
+	python python_file_producer.py -b localhost:9092 -s http://localhost:8081 -t employe
+
+In the command above, we do not run the get_started.ini file, instead we specify the schema registry port (8081) and the broker port (9092). Now, in our consumer prompt, we can run the consumer
+python script with this command:
+
+	python python_file_consumer.py -b localhost:9092 -s http://localhost:8081 -t employe
+
+The data we inputed when running the producer will then appear. 
+
+You can pick all the names of the different subjects (schema linked to a kafka topic) by going to this link http://localhost:8081/subjects/, usualy it show the name of the topic followed by '-value'.
+And now you can access all the raw schemas by using the subjects name you just previously requested, http://localhost:8081/subjects/employe-value/versions/latest
+This type of request return data with a json format wrote in AVRO.
+
+http://localhost:8081/subjects/employe-value/versions/latest
+Again, do not forget to stop your docker container and remove it.
+
+
+------------------------
+Other useful information
+------------------------
+
+changing the docker-compose file:
+	
+	If you check the docker-compose file, addtional lines were added: for the schema registry and the control center. The first's addition allows to store the schem registry we enter,
+	the second allows us to access a center on our local host where data and schem registry values are stored. This way, we can nicely visualise our data and the schem registry. 
+
+
+
+

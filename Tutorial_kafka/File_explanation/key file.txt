@@ -1,0 +1,12 @@
+The .key file
+_________________________
+
+definition:
+
+The .key file is the file which you use to log into the kafka broker. You can iagine it as the authentification password.
+It is provided by the team inside SES in charge of kafka brokers access.
+
+
+placement:
+
+Any path which the script running can access.

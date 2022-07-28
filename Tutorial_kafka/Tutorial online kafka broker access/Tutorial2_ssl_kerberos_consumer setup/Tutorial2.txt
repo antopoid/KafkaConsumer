@@ -1,0 +1,56 @@
+----------
+Tutorial2
+----------
+
+Now, we will stop running local hosted versions, to try and access online kafka brokers.
+
+In SES, there are usually two main aspects which need to be satisfied by the kafka consumer
+to access SES kafka brokers. The first is the kerberos authentification, the second is the SSL authen-
+tification. 
+
+The kerberos authentification is done using a:
+	- principal name
+	- a Keytab file (.key) used for Kafka broker authentication
+	- a kerberos authentification file: .ini for windows and .conf for linux
+		(see the file explanation folder for further explanation on where this 
+		configuration file should be located)
+
+
+We will also move to the kafka-python library, instead of confluent-kafka. We will use only the confluent-avro
+for deserialising the data from the broker.
+
+
+Your kafka consumer should now look something like this, after having performed the shown import.
+
+#start of code
+from kafka import KafkaConsumer
+kafka_consumer = KafkaConsumer('Topic',
+              bootstrap_servers=,
+              group_id= ,
+              enable_auto_commit='true',
+              auto_offset_reset=,
+              ssl_check_hostname="false",
+              ssl_cafile=certificat_path,
+              security_protocol="SASL_SSL",
+              sasl_mechanism="GSSAPI",
+              consumer_timeout_ms=50000,) #this is a time out of 50 seconds. This is usefult os top your consumer by itself. 
+
+#end of code
+
+
+						
+What the time out means, is that if after a certain about of time in milliseconds, the kafka consumer does not get data 
+from the broker, it will stop trying to fetch data and will close. 
+
+The groupid will certainly be made with the same identifier as your principal name provided. 
+
+The auto_offset_reset can be set to 'earliest' or 'latest' depending on till when you want to go back to fetch data.
+
+The Topic is the name of the topic you should have access to, on which data is stored.
+
+
+
+
+
+
+

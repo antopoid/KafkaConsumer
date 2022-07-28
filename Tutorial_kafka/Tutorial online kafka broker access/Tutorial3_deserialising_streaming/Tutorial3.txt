@@ -1,0 +1,43 @@
+----------
+Tutorial 3
+----------
+
+Now that our consumer is set up and the ssl certification and kerberos authentification is made,
+let's deserialise the data and stream it! Lets first import the useful packages:
+
+#start of code
+
+from confluent_avro import AvroKeyValueSerde, SchemaRegistry
+from confluent_avro.schema_registry import HTTPBasicAuth
+
+#end of code
+
+As presented earlier in the basic example deserialising data is quite straight forward. The set-up of the
+code is as follows:
+
+#start of code
+registry_client = SchemaRegistry(
+                    schema_registry_link,
+                    HTTPBasicAuth(schema_registry_user_name, schema_registry_password),
+                    headers={"Content-Type": "application/vnd.schemaregistry.v1+json"},
+                    )
+
+    avroSerde = AvroKeyValueSerde(registry_client, Topic)
+#end of code
+
+We start by building the registry client. There we provide the address to the schema registry (where the format of the
+kafka broker data is included), and we also provide the username and the password provided to access this schema registry.
+As you may notice, the format of the data is avro here in the example. As far as we know, avro in json is the common
+way of storing kafka records.
+
+#start of code
+
+for msg in kafka_consumer:
+    v = avroSerde.value.deserialize(msg.value)  #this part deserialises the values from the broker
+
+kafka_consumer.close()  #closes the consumer
+
+#end of code
+
+The loop will end when the time out is reacher, i.e. when no more data is gotten from the kafka broker.
+    
